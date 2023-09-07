@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Wild Waves Aquatic Park</title>
+</head>
+<body>
+    <h1>Wild Waves Aquatic Park</h1>
+    <button type="button" onclick="buyTicket()">Purchase Attraction</button>
+    <script>
+        function buyTicket() {
+            const attractionType = prompt('Which attraction do you want to visit: type "wave" for wave pool, "water" for water slide, or "river" for lazy river?');
+            if (attractionType === null) {
+                return;
+            }
+
+            console.log("User's selected attraction is " + attractionType);
+
+            const userHeight = prompt('What is your height in inches?');
+            if (userHeight === null) {
+                return;
+            }
+
+            console.log("User's height is " + userHeight);
+
+            const isWithAdult = prompt("Are you with an adult? (yes or no)").toLowerCase() === "yes";
+            console.log("Is the user with an adult? " + isWithAdult);
+
+            const isTallEnough = checkHeight(attractionType, userHeight, isWithAdult);
+            displayResult(isTallEnough);
+        }
+
+        function checkHeight(attractionType, userHeight, isWithAdult) {
+            const WAVE_POOL_MIN_HEIGHT = 42; // in inches
+            const WATERSLIDE_MIN_HEIGHT = 48; // in inches
+            const LAZY_RIVER_MIN_HEIGHT = 36; // in inches
+
+            if (userHeight >= 43 && isWithAdult) {
+                return true;
+            }
+
+            if (attractionType === "wave" && userHeight >= WAVE_POOL_MIN_HEIGHT) {
+                return true;
+            } else if (attractionType === "water" && userHeight >= WATERSLIDE_MIN_HEIGHT) {
+                return true;
+            } else if (attractionType === "river" && userHeight >= LAZY_RIVER_MIN_HEIGHT) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function displayResult(isTallEnough) {
+            if (isTallEnough) {
+                alert("Congratulations! You're tall enufff to ride this attraction. Enjoy your visit!!!");
+            } else {
+                alert("Sorry! You're too short for this ride small fry. Pick another one that's less fun!!!");
+            }
+        }
+    </script>
+</body>
+</html>
